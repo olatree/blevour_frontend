@@ -101,6 +101,11 @@ export default function Sidebar({ isOpen, onClose }) {
     lessons: false,
   });
 
+  const [utilMenus, setUtilMenus] = useState({
+    result: false,
+    lessons: false,
+  });
+
   const toggleAdminMenu = (menu) => {
     setAdminMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
   };
@@ -115,6 +120,10 @@ export default function Sidebar({ isOpen, onClose }) {
 
   const toggleTeacherMenu = (menu) => {
     setTeacherMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
+  };
+
+  const toggleUtilMenu = (menu) => {
+    setUtilMenus((prev) => ({ ...prev, [menu]: !prev[menu] }));
   };
 
   const AdminSidebar = () => (
@@ -454,6 +463,111 @@ export default function Sidebar({ isOpen, onClose }) {
           icon={<ClipboardCheck size={16} />}
           onClick={onClose}
         />
+      </CollapsibleSection>
+    </>
+  );
+
+  const UtilSidebar = () => (
+    <>
+      <NavItem
+        to="/admin/"
+        label="Dashboard"
+        icon={<HomeIcon size={18} />}
+        onClick={onClose}
+        end
+      />
+
+      <CollapsibleSection
+        title="Lesson Management"
+        icon={<NotebookTabs size={18} />}
+        isOpen={adminMenus.lessons}
+        onToggle={() => toggleAdminMenu("lessons")}
+      >
+        <NavItem
+          to="/admin/lessons/create"
+          label="Create Lesson"
+          icon={<PlusCircle size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/lessons"
+          label="Manage Lessons"
+          icon={<NotebookTabs size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/lessons/drafts"
+          label="Draft Lessons"
+          icon={<FileText size={16} />}
+          onClick={onClose}
+        />
+      </CollapsibleSection>
+
+
+      <CollapsibleSection
+        title="Result Management"
+        icon={<FileText size={18} />}
+        isOpen={adminMenus.result}
+        onToggle={() => toggleAdminMenu("result")}
+      >
+        <NavItem
+          to="/admin/enter-results"
+          label="Enter Result"
+          icon={<FileText size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/attendance"
+          label="Attendance"
+          icon={<Calendar size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/enter-comments"
+          label="Principal Comments"
+          icon={<MessageSquare size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/head-teacher-comments"
+          label="Head Teacher Comments"
+          icon={<MessageSquare size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/teacher-comments"
+          label="Teacher Comments"
+          icon={<MessageSquare size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/view-results"
+          label="View Results By Subject"
+          icon={<ClipboardList size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/view-Student-results"
+          label="View Student Result"
+          icon={<FileText size={16} />}
+          onClick={onClose}
+        />
+
+        <NavItem
+          to="/admin/view-results-by-class"
+          label="View Result By Class"
+          icon={<BarChart3 size={16} />}
+          onClick={onClose}
+        />
+
       </CollapsibleSection>
     </>
   );
@@ -978,6 +1092,7 @@ export default function Sidebar({ isOpen, onClose }) {
     </>
   );
 
+
   const renderSidebarContent = () => {
     switch (user?.role) {
       case "admin":
@@ -990,6 +1105,9 @@ export default function Sidebar({ isOpen, onClose }) {
 
       case "head_teacher":
         return <HeadTeacherSidebar />;
+
+      case "util_admin":
+        return <UtilSidebar />;
 
       case "teacher":
       case "class_teacher":

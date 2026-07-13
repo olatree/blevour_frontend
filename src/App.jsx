@@ -95,7 +95,7 @@ export default function App() {
 
           {/* Example: Sessions page: only super_admin */}
           <Route
-            element={<RoleProtectedRoute allowedRoles={['master_admin', 'super_admin', 'admin', 'principal', "head_teacher", 'teacher']} />}
+            element={<RoleProtectedRoute allowedRoles={['master_admin', 'super_admin', 'admin', 'principal', "head_teacher", 'teacher', 'util_admin']} />}
           >
             <Route path="sessions" element={ <SessionsPage /> }/>
             <Route path="classes" element={ <ClassesPage /> }/>

@@ -45,6 +45,7 @@ export default function Login() {
       teacher: "/admin",
       principal: "/admin",
       head_teacher: "/admin",
+      util_admin: "/admin"
     };
 
     navigate(redirectPaths[result.user.role] || "/dashboard", {

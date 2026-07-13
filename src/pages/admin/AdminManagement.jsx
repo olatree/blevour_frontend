@@ -362,6 +362,7 @@ const AdminManagement = () => {
             >
               <option value="admin">Admin</option>
               <option value="super_admin">Super Admin</option>
+              <option value="util_admin">Utility Admin</option>
             </select>
           </div>
 
